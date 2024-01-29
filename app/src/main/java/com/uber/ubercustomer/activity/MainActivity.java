@@ -1,8 +1,10 @@
-package com.uber.ubercustomer;
+package com.uber.ubercustomer.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.uber.ubercustomer.R;
 
 public class MainActivity extends AppCompatActivity {
 
