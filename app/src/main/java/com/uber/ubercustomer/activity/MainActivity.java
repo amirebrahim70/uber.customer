@@ -12,12 +12,15 @@ import android.location.LocationManager;
 import android.os.Bundle;
 
 import com.uber.ubercustomer.R;
+import com.uber.ubercustomer.retrofit.location.ILocationService;
+import com.uber.ubercustomer.retrofit.location.LocationServiceBuilder;
 import com.uber.ubercustomer.tools.IActivityBase;
 
 public class MainActivity extends AppCompatActivity implements IActivityBase {
 
     private LocationManager locationManager;
     private LocationListener locationListener;
+    private ILocationService locationService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements IActivityBase {
     @Override
     public void initViewRefrences() {
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        locationService = new LocationServiceBuilder().getService();
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(@NonNull Location location) {

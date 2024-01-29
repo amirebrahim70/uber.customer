@@ -6,6 +6,8 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import com.uber.ubercustomer.R;
+import com.uber.ubercustomer.retrofit.identity.IIdentityService;
+import com.uber.ubercustomer.retrofit.identity.IdentityServiceBuilder;
 import com.uber.ubercustomer.tools.IActivityBase;
 import com.uber.ubercustomer.tools.ILoadingDialog;
 
@@ -14,6 +16,7 @@ import java.nio.file.SecureDirectoryStream;
 public class LoginActivity extends AppCompatActivity implements IActivityBase, ILoadingDialog {
 
     private ProgressDialog dialog;
+    private IIdentityService identityService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +28,7 @@ public class LoginActivity extends AppCompatActivity implements IActivityBase, I
 
     @Override
     public void initViewRefrences() {
-
+        identityService = new IdentityServiceBuilder().getService();
     }
 
     @Override

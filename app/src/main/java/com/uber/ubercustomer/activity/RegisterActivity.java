@@ -6,12 +6,15 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import com.uber.ubercustomer.R;
+import com.uber.ubercustomer.retrofit.identity.IIdentityService;
+import com.uber.ubercustomer.retrofit.identity.IdentityServiceBuilder;
 import com.uber.ubercustomer.tools.IActivityBase;
 import com.uber.ubercustomer.tools.ILoadingDialog;
 
 public class RegisterActivity extends AppCompatActivity implements IActivityBase, ILoadingDialog {
 
     private ProgressDialog dialog;
+    private IIdentityService identityService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity implements IActivityBase
 
     @Override
     public void initViewRefrences() {
-
+        identityService = new IdentityServiceBuilder().getService();
     }
 
     @Override
