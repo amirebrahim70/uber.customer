@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import com.uber.ubercustomer.R;
 import com.uber.ubercustomer.retrofit.location.ILocationService;
 import com.uber.ubercustomer.retrofit.location.LocationServiceBuilder;
+import com.uber.ubercustomer.services.updatemap.Service;
 import com.uber.ubercustomer.tools.IActivityBase;
 
 public class MainActivity extends AppCompatActivity implements IActivityBase {
@@ -34,19 +36,21 @@ public class MainActivity extends AppCompatActivity implements IActivityBase {
 
     @Override
     public void initViewRefrences() {
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+       /* locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         locationService = new LocationServiceBuilder().getService();
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(@NonNull Location location) {
 
             }
-        };
+        };*/
     }
 
     @Override
     public void initViewActions() {
-        setLocationUpdateListener();
+
+      //  setLocationUpdateListener();
+        startUpdateMapSerivce();
     }
 
     @Override
@@ -58,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements IActivityBase {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
         }
     }
 
@@ -67,5 +71,10 @@ public class MainActivity extends AppCompatActivity implements IActivityBase {
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
         )
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locationListener);
+    }
+
+    private  void startUpdateMapSerivce(){
+        Intent intent = new Intent(this, Service.class);
+        startService(intent);
     }
 }
