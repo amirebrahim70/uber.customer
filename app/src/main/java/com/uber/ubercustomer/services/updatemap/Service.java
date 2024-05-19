@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.IBinder;
 
 import androidx.annotation.Nullable;
@@ -54,6 +55,9 @@ public class Service extends android.app.Service {
 
     @Override
     public void onCreate() {
+        this.registerReceiver(new Receiver(), new IntentFilter("com.uber.ubercustomer.services.updatemap.receiver"));
         super.onCreate();
     }
+
+
 }

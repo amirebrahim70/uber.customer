@@ -11,6 +11,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.uber.ubercustomer.R;
 import com.uber.ubercustomer.retrofit.location.ILocationService;
@@ -74,7 +75,11 @@ public class MainActivity extends AppCompatActivity implements IActivityBase {
     }
 
     private  void startUpdateMapSerivce(){
-        Intent intent = new Intent(this, Service.class);
-        startService(intent);
+        try {
+            Intent intent = new Intent(MainActivity.this, Service.class);
+            startForegroundService(intent);
+        }catch (Exception e ){
+            Log.e("Receiver",e.getMessage());
+        }
     }
 }
